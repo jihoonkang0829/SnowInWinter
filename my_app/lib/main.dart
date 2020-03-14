@@ -1,6 +1,8 @@
 // export PATH="$PATH:/Users/donghyeonjeong/Desktop/flutter/bin"
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 void main() => runApp(CameraApp());
 
@@ -12,8 +14,17 @@ class CameraApp extends StatefulWidget {
 }
 
 class CameraState extends State<CameraApp> {
-  picker(){
+  File image;
+  picker() async {
     print("picker is called"); 
+    File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    if (image != null) {
+      image = img;
+      print(img.path);
+      setState(() {
+        
+      });
+    }
   }
 
   @override
@@ -25,13 +36,13 @@ class CameraState extends State<CameraApp> {
         ),
         body: new Container(
           child: new Center(
-            child: new Text("No image to display"),
+            child: image == null ? new Text("no image to display") : new Image.file(image),
           ),
         ),
         floatingActionButton: new FloatingActionButton(
           onPressed: picker, 
           child: new Icon(Icons.camera_alt)
-        ),
+        ), 
       ),
     );
   }
