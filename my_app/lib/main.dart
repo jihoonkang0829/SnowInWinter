@@ -12,12 +12,25 @@ class CameraApp extends StatefulWidget {
 }
 
 class CameraState extends State<CameraApp> {
+  picker(){
+    print("picker is called"); 
+  }
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
         appBar: AppBar(
-          title: new Text("hi"),
+          title: new Text("Image Picker"),
+        ),
+        body: new Container(
+          child: new Center(
+            child: new Text("No image to display"),
+          ),
+        ),
+        floatingActionButton: new FloatingActionButton(
+          onPressed: picker, 
+          child: new Icon(Icons.camera_alt)
         ),
       ),
     );
