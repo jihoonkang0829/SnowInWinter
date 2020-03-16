@@ -122,7 +122,7 @@ class _Shadow extends StatelessWidget {
       bottom: bottom,
       left: MediaQuery.of(context).size.width / 2 - (shadowSize / 2),
       child: new Transform.rotate(
-        angle: PI / 4,
+        angle: pi / 4,
         child: new Container(
           width: shadowSize,
           height: shadowSize,

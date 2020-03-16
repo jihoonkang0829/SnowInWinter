@@ -22,10 +22,10 @@ IconData _cameraLensIcon(CameraLensDirection currentDirection) {
 
 void playPause() {
   if (_controller != null) {
-    if (_controller.value.isStarted) {
-      _controller.stop();
+    if (_controller.value.isInitialized) {
+      _controller.stopImageStream();
     } else {
-      _controller.start();
+      _controller.startImageStream(onAvailable);
     }
   }
 }
@@ -117,7 +117,7 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
     var screenDimension = MediaQuery.of(context).size;
     final List<Widget> columnChildren = <Widget>[];
 
-    if (_controller != null && _controller.value.initialized) {
+    if (_controller != null && _controller.value.isInitialized) {
       columnChildren.add(new Expanded(
         child: new FittedBox(
           fit: BoxFit.fitHeight,
@@ -149,15 +149,15 @@ class _CameraHomeState extends State<CameraHome> with WidgetsBindingObserver {
       child: new FlatButton(
         onPressed: () {
           setState(() {
-            if (_controller.value.isStarted) {
-              _controller.stop();
+            if (_controller.value.isInitialized) {
+              _controller.stopImageStream();
             } else {
-              _controller.start();
+              _controller.startImageStream(onAvailable);
             }
           });
         },
         child: new Icon(
-          _controller.value.isStarted ? Icons.pause : Icons.play_arrow
+          _controller.value.isInitialized ? Icons.pause : Icons.play_arrow
         ),
       ),
     );
